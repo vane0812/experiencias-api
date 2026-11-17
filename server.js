@@ -15,18 +15,20 @@ app.get('/', (req, res) => {
 });
 
 // Conectar con MongoDB
+const PORT = process.env.PORT || 3000;
+
 mongoose.connect(process.env.MONGO_URI)
   .then(() => {
     console.log('Conectado a MongoDB');
 
-    app.listen(process.env.PORT || 3000, () => {
-      console.log('Servidor funcionando en el puerto 3000');
+    app.listen(PORT, () => {
+      console.log(`Servidor funcionando en el puerto ${PORT}`);
     });
   })
   .catch((error) => {
     console.error('Error de conexión:', error.message);
   });
-
+  
 // 1. CREAR una experiencia
 app.post('/api/experiencias', async (req, res) => {
   try {
